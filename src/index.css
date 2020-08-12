@@ -1,13 +1,69 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face{
+    font-family: 'JSL';
+    src:url('./assets/iconfont/JosefinSans-Light.ttf');
+}
+*{margin:0px;padding:0px;box-sizing: border-box;}
+ul,li{list-style-type:none;}
+input{outline: none;border-radius: 0px;border:0 none;}
+html,body {
+    /*font-size: 20px!important;*/
+    min-height: 100%;
+    /* overflow-x:hidden; */
+	-webkit-tap-highlight-color:rgba(0,0,0,0);	/*禁止链接高亮*/ 	
+	-webkit-touch-callout:none;	/*禁止链接长按弹出选项*/
+    background-color:#fff;
+    line-height:normal !important;
+    font-family: "JSL","Helvetica Neue","PingFang SC","'Hiragino Sans GB",STHeiti,"Microsoft Yahei","Source Han Sans SC","Noto Sans CJK SC","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
+    color: #606975;
+}
+a {
+    color: #606975;
+    cursor: pointer;
+    text-decoration: none;
+}
+.hide {display: none;}
+h4 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.1;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* 设置滚动条样式 */
+html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+html::-webkit-scrollbar-thumb {
+    height: 40px;
+    background-color: #eee;
+    border-radius: 16px;
+}
+
+/* Markdown 样式设置 */
+.mdeditor ul,li {
+    list-style: disc outside none;
+    margin-left: 40px;
+}
+.mdeditor li {margin: 5px 0;}
+.mdeditor blockquote {
+    padding: 5px 20px;
+    margin: 10px 0 10px 0;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
+    display: block;
+}
+.mdeditor h1,h2,h3,h4,h5,h6 {
+    /* padding: 20px 0; */
+    /* padding-bottom: 0px; */
+}
+.mdeditor table{
+    text-align:center;
+    padding:0 10px;
+}
+.mdeditor a {
+    color: #29B5E8;
+}
+.mdeditor a:hover {
+    color:#fff;
+    background-color: #98a3b1;
 }
