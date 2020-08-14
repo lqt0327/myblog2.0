@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Form, Input, Button } from 'antd';
 import { AddArticleRequest } from '../../../api/request';
@@ -27,9 +27,20 @@ const validateMessages = {
 };
 /* eslint-enable */
 const AddArticle = () => {
+
+    const title = useRef();
+    const content = useRef();
+
     const onFinish = values => {
         // console.log(values);
-        AddArticleRequest(values.title,values.content);
+        
+        // AddArticleRequest(values.title,values.content);
+        values.title = "";
+        values.content = "";
+        console.log(title);
+        console.log(content);
+        title.current.input.value = "";
+        content.current.resizableTextArea.textArea.value = "";
     };
 
     return (
@@ -44,7 +55,7 @@ const AddArticle = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input ref={title} />
                 </Form.Item>
                 <Form.Item
                   name='content'
@@ -55,7 +66,7 @@ const AddArticle = () => {
                     },
                 ]}
                 >
-                    <Input.TextArea autoSize />
+                    <Input.TextArea autoSize ref={content} />
                 </Form.Item>
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                     <Button type="primary" htmlType="submit">

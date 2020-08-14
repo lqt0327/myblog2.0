@@ -1,32 +1,76 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArchiveContent } from './style';
+import { getArchivesRequest } from '../../api/request';
+import { useState } from 'react';
+import { useRef } from 'react';
+import { useCallback } from 'react';
+import Loading from '../../baseUI/Loading';
+import { Link } from 'react-router-dom'
 
 function Archive() {
+
+    const [archiveData,setArchiveData] = useState({});
+    
+    const archiveMountedRef = useRef(false);
+
+    const safeSetArchiveData = res => archiveMountedRef.current && setArchiveData(res);
+
+    const getArchiveData = useCallback(()=>{
+        getArchivesRequest()
+        .then(res=>{
+            if(res.code === 200) {
+                // 筛选出年份并拼接到新加的 year 属性上
+                res.year = [];
+                for(let i = 0; i < res.data.length; i++) {
+                    res.data[i].time = new Date(res.data[i].time*1000).toLocaleDateString().split('/');
+                    if(i > 0 && res.data[i].time[0] !== res.data[i-1].time[0]) {
+                        res.year.push(res.data[i].time[0]);
+                    } 
+                }
+                res.year.unshift(res.data[0].time[0])
+                safeSetArchiveData(res)
+            }
+        })
+    },[])
+
+    useEffect(()=>{
+        archiveMountedRef.current = true;
+        return (()=>{
+            archiveMountedRef.current=false
+        })
+    })
+
+    useEffect(()=>{
+        getArchiveData();
+    },[getArchiveData])
+
+
     return (
         <ArchiveContent>
             <div className="content">
                 <div className="archive animated">
                     <ul className="list-with-title">
-                        <p className="post-title">归档 10 篇</p>
+                        <p className="post-title">归档 {archiveData.data ? archiveData.data.length : 0} 篇</p>
                         <div className="archive">
                             {
-                                new Array(3).fill(0).map((item, index) => {
+                                archiveData.data ? archiveData.year.map((item, index) => {
                                     return (
                                         <div key={index}>
                                         <div className="listing-title">
-                                            <h4 className="ar-year">2020</h4>
+                                            <h4 className="ar-year">{item}</h4>
                                         </div>
                                         <div className="listing">
                                             {
-                                                new Array(10).fill(0).map((item2, index2) => {
+                                                // 将各个年份的数据分类筛选
+                                                archiveData.data.filter(ans=>ans.time[0] === item).map((item2, index2) => {
                                                     return (
                                                         <div className="listing-item" key={index2}>
                                                             <div className="listing-post">
                                                                 <p className="post-title">
-                                                                    <a href="/post/1?id=123">测试数据qwe</a>
+                                                                    <Link to={"/post/"+item2.id}>{item2.title}</Link>
                                                                 </p>
                                                                 <div className="post-time">
-                                                                    <span className="ar-date">8-10</span>
+                                                                    <span className="ar-date">{item2.time[1]}-{item2.time[2]}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -36,7 +80,7 @@ function Archive() {
                                         </div>
                                         </div>
                                     )
-                                })
+                                }): <Loading />
                             }
                         </div>
                     </ul>

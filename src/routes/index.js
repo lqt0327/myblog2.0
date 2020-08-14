@@ -9,6 +9,7 @@ const CateComponent = lazy(() => import("../application/Categories"))
 const TagsComponent = lazy(() => import("../application/Tags"))
 const AboutComponent = lazy(() => import("../application/Abouts"))
 const AdminComponent = lazy(() => import("../application/Admin"));
+const CateListComponent = lazy(() => import("../application/CateList"))
 
 
 const SuspenseComponent = Component => props => {
@@ -50,6 +51,10 @@ export default [{
                 {
                     path: "/categories",
                     component: SuspenseComponent(CateComponent)
+                },
+                {
+                    path:'/catelist/:id',
+                    component: SuspenseComponent(CateListComponent)
                 },
                 {
                     path: "/tags",

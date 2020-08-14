@@ -1,13 +1,43 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Comment } from './style';
+import { getCommentsRequest } from '../../api/request';
+import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../../assets/CodeBlock';
 // import style from '../../assets/global-style';
 // import PropTypes from "prop-types";
 
 // 处理函数组件拿不到ref的问题,所以用forwardRef
 const CommentContainer = React.forwardRef((props, ref) => {
-    // const { } = props;
+    const { pid } = props;
+
+    const [comments,setCommentsData] = useState({});
+    const [page, setPage] = useState(1);
+
+    const commentsMountedRef = useRef(false);
+
+    const safeSetCommentsData = res => commentsMountedRef && setCommentsData(res);
 
     const veditor = useRef()
+
+    const getCommentsData = useCallback((pid,page) => {
+        getCommentsRequest(pid,page)
+        .then(res => {
+            if(res.code === 200) {
+                safeSetCommentsData(res.data);
+            }
+        })
+    },[])
+
+    useEffect(()=>{
+        commentsMountedRef.current = true;
+        return ()=>(commentsMountedRef.current = false)
+    })
+
+    useEffect(()=>{
+        getCommentsData(pid,page)
+    },[getCommentsData,page,pid])
+
+    
 
     return (
         <Comment>
@@ -44,8 +74,8 @@ const CommentContainer = React.forwardRef((props, ref) => {
             </div>
             <div className="vinfo">
                 <div className="vcount col">
-                    <span className="vnum">12</span>
-                    评论
+                    <span className="vnum">{comments ? comments.total : 0}</span>
+                    评论(功能测试中)
                 </div>
             </div>
             <div className="vlist">
@@ -83,20 +113,28 @@ const CommentContainer = React.forwardRef((props, ref) => {
                     </div>
                 </div>
                 {
-                    new Array(10).fill(0).map((item, index) => {
+                    comments.data && Object.values(comments.data).map((item, index) => {
                         return (
                             <div className="vcard" key={index}>
                                 <img className="vimg" src={require('../../assets/images/comment/avatar_default.png')} alt="" />
                                 <div className="vh">
                                     <div className="vhead">
-                                        <span className="vnick">Anonymous</span>
+                                        <span className="vnick">{item.author}</span>
                                     </div>
                                     <div className="vmeta">
-                                        <span className="vtime">2020-07-23</span>
+                                        <span className="vtime">{new Date(item.time*1000).toLocaleString()}</span>
                                         <span className="vat">回复</span>
                                     </div>
                                     <div className="vcontent">
-                                        <p>这个主题真好看，进来学习学习</p>
+                                    <ReactMarkdown
+                                        className="mdeditor"
+                                        source={item.content}
+                                        escapeHtml={false}
+                                        renderers={{
+                                            code: CodeBlock
+                                        }}
+                                    //   plugins={[toc]}
+                                    />
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +144,9 @@ const CommentContainer = React.forwardRef((props, ref) => {
             </div>
             <div className="vempty"></div>
             <div className="vpage txt-center">
-                <button type="button" className="vmore vbtn">查看更多…</button>
+                <button type="button" className="vmore vbtn" onClick={()=>{
+                    console.log(comments)
+                }}>查看更多…</button>
             </div>
             <div className="info"></div>
         </Comment>

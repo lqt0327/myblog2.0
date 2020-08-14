@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import routes from './routes/index';
 import Firewords from './assets/firewords';
@@ -14,12 +14,12 @@ function App() {
   },[])
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <IconStyle></IconStyle>
       {
         renderRoutes(routes)
       }
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

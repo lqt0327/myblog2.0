@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { renderRoutes } from 'react-router-config';
 import { Page, RightColumn } from './HomeLayout.style';
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 function Home(props) {
 
@@ -17,10 +17,10 @@ function Home(props) {
                     <RightColumn>
                         <div className="vertical-text site-title" onClick={() => { setShow(!show);props.history.push('/') }}>
                             <h3 className="site-title-small">
-                                <a href="/" className="a-title">浊以静之徐清，安以动之徐生</a>
+                                <a href="/" className="a-title">几万次，几亿次，不断往复</a>
                             </h3>
                             <h1 className="site-title-large">
-                                <a href="/" className="a-title">猫与向日葵</a>
+                                <a href="/" className="a-title">海与潮汐</a>
                             </h1>
                         </div>
                         <br className="visible-lg visible-md visible-sm" />
@@ -44,6 +44,13 @@ function Home(props) {
                                 </li>
                                 <li>
                                     <NavLink to="/about/index.html" activeClassName="current">关于</NavLink>
+                                </li>
+                                <li>
+                                    <Link to="/"><i className="iconfont">&#xe882;</i></Link>
+                                    <span> </span>
+                                    <Link to="/"><i className="iconfont">&#xe883;</i></Link>
+                                    <span> </span>
+                                    <Link to="/"><i className="iconfont">&#xe885;</i></Link>
                                 </li>
                             </ul>
                             <div className="site-nav-footer">

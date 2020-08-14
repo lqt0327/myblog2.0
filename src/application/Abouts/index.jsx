@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { AboutPage } from './style';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../assets/CodeBlock';
-// import testMd from "../../md/test.md";
+// import testMd from "../../md/article.md";
 import aboutme from "../../md/aboutme.md";
 import Comment from '../../baseUI/comment'
 

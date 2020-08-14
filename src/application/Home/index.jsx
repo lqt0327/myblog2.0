@@ -53,15 +53,15 @@ function Home(props) {
                                     <span className="meta-item">
                                         <i></i>
                                         <span> </span>
-                                        <a href="/" title="lab" className="a-tag">lab</a>
+                                        <Link to="/" title="lab" className="a-tag">lab</Link>
                                         <span> </span>
                                     </span>
                                     <span className="meta-item">
                                         <i></i>
                                         <span> </span>
-                                        <a href="/" title="3D" className="a-tag">JS</a>
+                                        <Link to="/" title="3D" className="a-tag">JS</Link>
                                         <span> </span>
-                                        <a href="/" title="破解" className="a-tag">技术</a>
+                                        <Link to="/" title="破解" className="a-tag">技术</Link>
                                         <span> </span>
                                     </span>
                                 </p>
@@ -81,11 +81,11 @@ function Home(props) {
                     <p>
                         <span className="pre pagbuttons">
                             <i className="iconfont">&#xe7ed;</i>
-                            <a href={"/home/page/"+(msgData.current_page > 1 ? msgData.current_page - 1 : 1)} role="navigation" onClick={()=>{setShow(!show)}}>上一页</a>
+                            <Link to={"/home/page/"+(msgData.current_page > 1 ? msgData.current_page - 1 : 1)} role="navigation" onClick={()=>{setShow(!show)}}>上一页</Link>
                         </span>
                         <span> </span>
                         <span className="next pagbuttons">
-                            <a role="navigation" href={"/home/page/"+(msgData.current_page < msgData.last_page ? msgData.current_page + 1 : msgData.last_page)} onClick={()=>{setShow(!show)}}>下一页</a> 
+                            <Link role="navigation" to={"/home/page/"+(msgData.current_page < msgData.last_page ? msgData.current_page + 1 : msgData.last_page)} onClick={()=>{setShow(!show)}}>下一页</Link> 
                             <i className="iconfont">&#xe7ee;</i>
                         </span>
                     </p>

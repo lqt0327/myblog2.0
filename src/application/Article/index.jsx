@@ -3,7 +3,7 @@ import { ArticePage } from './style';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../assets/CodeBlock';
 import { getArticleRequest } from '../../api/request';
-import Comment from '../../baseUI/comment'
+import Comment from '../../baseUI/comment';
 import Loading from '../../baseUI/Loading';
 
 function Article(props) {
@@ -39,6 +39,7 @@ function Article(props) {
             <div className="content">
                 {
                     Object.values(articleData).length!==0 ?
+                    <>
                         <div className="post-page">
                             <div className="post-container"></div>
                             <h1 className="post-title">{articleData.title}</h1>
@@ -56,8 +57,7 @@ function Article(props) {
                             //   plugins={[toc]}
                             />
                         </div>
-                        : <Loading />
-                }
+                        
                 <div className="pagination">
                     <p className="clearfix">
                         <span className="pre pagbuttons">
@@ -69,9 +69,12 @@ function Article(props) {
                         </span>
                     </p>
                 </div>
-                <Comment />
+                <Comment pid={articleData.id} />
+                </>
+                : <Loading />
+                }
             </div>
-
+                    
         </ArticePage>
     )
 }

@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { getCateRequest } from '../../api/request';
+import { useState } from 'react';
+import { useRef } from 'react';
+import Loading from '../../baseUI/Loading';
 
 export const Page = styled.div`
     ul {
@@ -8,6 +13,33 @@ export const Page = styled.div`
 `
 
 function Categories() {
+
+    const [cateData, setCateData] = useState({});
+
+    const cateMountedRef = useRef(false);
+
+    const safeSetCateData = res => cateMountedRef.current && setCateData(res);
+
+    const getCateData = useCallback(()=>{
+        getCateRequest()
+        .then(res=>{
+            if(res.code === 200) {
+                safeSetCateData(res);
+            }
+        })
+    },[])
+
+    useEffect(()=>{
+        cateMountedRef.current = true;
+        return (()=>{
+            cateMountedRef.current = false
+        })
+    })
+
+    useEffect(() => {
+        getCateData()
+    }, [getCateData])
+
     return (
         <Page>
             <div className="content">
@@ -17,18 +49,18 @@ function Categories() {
                         <div className="archive"></div>
                         <ul className="listing">
                             {
-                                new Array(10).fill(0).map((item, index) => {
+                                cateData.data ? cateData.data.map((item, index) => {
                                     return (
                                         <div className="list-item" key={index}>
                                             <div className="listing-post">
                                                 <p className="post-title">
-                                                    <a href="/" title="lab">lab</a>
+                                                    <Link to={"/catelist/"+item.id} title="lab">{item.catename}</Link>
                                                 </p>
-                                                <span className="date meta-item">10 篇</span>
+                                                {/* <span className="date meta-item">10 篇</span> */}
                                             </div>
                                         </div>
                                     )
-                                })
+                                }):<Loading />
                             }
                         </ul>
                     </ul>
