@@ -27,9 +27,9 @@ function Home(props) {
 
     useEffect(()=>{
         mountedRef.current = true;
-        return (()=>{
+        return ()=>{
             mountedRef.current = false;
-        })
+        }
     })
 
     useEffect(()=>{

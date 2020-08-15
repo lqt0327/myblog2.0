@@ -25,6 +25,11 @@ export const getCateRequest = () => {
   return axiosInstance.get('/index/cate');
 }
 
+// 根据分类id筛选文章
+export const getCateListRequest = (cid) => {
+  return axiosInstance.get(`/index/catelist?cid=${cid}`)
+}
+
 // 添加文章
 export const AddArticleRequest = (title, content) => {
   return axiosInstance.post(

@@ -12,7 +12,10 @@ export const Page = styled.div`
     }
 `
 
-function Categories() {
+function Categories(props) {
+
+    const show= props[0];
+    const setShow = props[1];
 
     const [cateData, setCateData] = useState({});
 
@@ -24,6 +27,7 @@ function Categories() {
         getCateRequest()
         .then(res=>{
             if(res.code === 200) {
+                // console.log(props,res);
                 safeSetCateData(res);
             }
         })
@@ -54,7 +58,7 @@ function Categories() {
                                         <div className="list-item" key={index}>
                                             <div className="listing-post">
                                                 <p className="post-title">
-                                                    <Link to={"/catelist/"+item.id} title="lab">{item.catename}</Link>
+                                                    <Link to={"/catelist/"+item.id} title={item.catename} onClick={()=>{setShow(!show)}}>{item.catename}</Link>
                                                 </p>
                                                 {/* <span className="date meta-item">10 篇</span> */}
                                             </div>

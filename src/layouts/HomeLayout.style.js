@@ -76,6 +76,7 @@ export const RightColumn = styled.nav`
         font-style: normal;
         width: auto;
         height: auto;
+        max-height: 400px;
         margin: 0 0 0 -2px;
         text-align: left;
         font-size: .5em;

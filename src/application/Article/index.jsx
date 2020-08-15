@@ -25,7 +25,9 @@ function Article(props) {
 
     useEffect(() => {
         articleMountedRef.current = true;
-        return () => (articleMountedRef.current = false)
+        return () => {
+            articleMountedRef.current = false
+        }
     })
 
     useEffect(() => {

@@ -15,7 +15,7 @@ const CommentContainer = React.forwardRef((props, ref) => {
 
     const commentsMountedRef = useRef(false);
 
-    const safeSetCommentsData = res => commentsMountedRef && setCommentsData(res);
+    const safeSetCommentsData = res => commentsMountedRef.current && setCommentsData(res);
 
     const veditor = useRef()
 
@@ -30,7 +30,9 @@ const CommentContainer = React.forwardRef((props, ref) => {
 
     useEffect(()=>{
         commentsMountedRef.current = true;
-        return ()=>(commentsMountedRef.current = false)
+        return ()=>{
+            commentsMountedRef.current = false
+        }
     })
 
     useEffect(()=>{
@@ -145,7 +147,7 @@ const CommentContainer = React.forwardRef((props, ref) => {
             <div className="vempty"></div>
             <div className="vpage txt-center">
                 <button type="button" className="vmore vbtn" onClick={()=>{
-                    console.log(comments)
+                    // console.log(comments)
                 }}>查看更多…</button>
             </div>
             <div className="info"></div>
