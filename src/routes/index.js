@@ -25,11 +25,12 @@ export default [{
     routes: [
         {
             path: "/llscw/lqt0327/admin",
-            component: SuspenseComponent(AdminComponent)
+            exact: true,
+            component: SuspenseComponent(AdminComponent),
         },
         {
             path: "/",
-            component: HomeLayout,
+            component: SuspenseComponent(HomeLayout),
             routes: [
                 {
                     path: "/",

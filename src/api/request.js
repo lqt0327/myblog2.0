@@ -30,6 +30,11 @@ export const getCateListRequest = (cid) => {
   return axiosInstance.get(`/index/catelist?cid=${cid}`)
 }
 
+// 删除文章
+export const deleteArticleRequest = (id) => {
+  return axiosInstance.get(`/index/deleteArticle?id=${id}`)
+}
+
 // 添加文章
 export const AddArticleRequest = (title, content) => {
   return axiosInstance.post(
@@ -39,3 +44,14 @@ export const AddArticleRequest = (title, content) => {
     }
   );
 };
+
+// 更新文章
+export const UpdateArticleRequest = (id,title,content) => {
+  return axiosInstance.post(
+    `/index/updateArticle`,{
+      id:id,
+      title:title,
+      content:content
+    }
+  )
+}

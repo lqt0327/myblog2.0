@@ -61,7 +61,7 @@ function Article(props) {
                         </div>
                         
                 <div className="pagination">
-                    <p className="clearfix">
+                    {/* <p className="clearfix">
                         <span className="pre pagbuttons">
                             <a role="navigation" href="/" title="在linux下拨号上网(PPPoE)和开启无线热点"><i className="iconfont">&#xe7ed;</i>&nbsp;上一篇: 在linux下拨号上网(PPPoE)和开启无线热点</a>
                         </span>
@@ -69,7 +69,7 @@ function Article(props) {
                         <span className="next pagbuttons">
                             <a role="navigation" href="/" title="提取ArtStation自带模型查看器中的模型数据">下一篇: 提取ArtStation自带模型查看器中的模型数据 <i className="iconfont">&#xe7ee;</i></a>
                         </span>
-                    </p>
+                    </p> */}
                 </div>
                 <Comment pid={articleData.id} />
                 </>
