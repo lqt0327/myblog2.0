@@ -1,66 +1,20 @@
-## 克隆仓库
-```
-git clone https://github.com/lqt0327/lesson_bm.git
-
-git status
-
-git add .
-
-git commit -m 'homework'
-
-git push origin master
-```
-
-## git新建存储库（new repository）后的初始化操作
-```
-git init
-
-git add .
-
-git commit -m 'project init'
-
-git remote add origin git@github.com:lqt0327/vue-music.git
-（git@github.com:lqt0327/vue-music.git 是该存储库的ssh）
-
-git pull origin master
-
-git push origin master  //报错，存储库里有文件，导致与本地版本不一致
-
-git push -u origin master -f  //解决上面报错，强制替换
-
-git push origin master
-
-```
-
-## 创建和管理分支
-```
-在网站中创建分支 或 git checkout -b 2020-7-18-home  //-b 表示有这个分支就切换到这个分支，没有就创建后再切换到这个分支
-
-git pull  //查看当前有的分支
-
-git checkout home-header  //更改分支到home-header，如由master改为home-header
-
-git status  //查看状态，准备合并分支
-
-git add .
-
-git commit -m 'home-header'
-
-git push
-
-git checkout master  //切换到master分支
-
-git merge home-header  //把home-header分支的工作成果合并到master分支上
-
-git pull  //从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
-
-git push
-
-```
-
-[git pull 参考](https://www.liaoxuefeng.com/wiki/896043488029600/900375748016320)
-
-
-```
-git push --set-upstream origin 2020-07-18-home
-```
+.jpg的全称是Joint Photographic Experts Group,即.jpeg.
+ 
+ - 优点 : 兼容性高、传输速度快、内存小;
+ - 缺点 : 有损压缩
+ 
+.gif : GIF格式的图片是分为静态和动态两种的。静态的GIF格式图片和JPG格式的图片无异，而动态的GIF图片则是由多幅图片保存为一个图片，形成动画效果而制成的.然而，它们只能包含最多 256 种颜色，因此并不适合用在照片上，除非照片的颜色比较单一.
+ - 优点 : 档案小、非常适合在网页使用，可以制作动画;
+ - 缺点 : 包容颜色太少
+ 
+.png : 可移植网络图形格式, 其设计目的是试图替代GIF和TIFF文件格式，同时增加一些GIF文件格式所不具备的特性。对于图片本身质量的减损非常低。因其能够支持压缩不失真、透明背景、渐变图像的制作要求，PNG格式也是各大制图软件例如PS、InDesign输出或编辑的原始格式。PNG文件非常适合在互联网上使用。
+ - 优点 : 能够相容半透明 / 透明图像;
+ - 缺点 : 档案比 JPEG 大，不能用于印刷
+ 
+.bmp : BMP 格式能把颜色数据保存在每一个单独的像素中，BMP格式的图片文件内存较大，不会作任何压缩，保存了每个像素的信息.
+ - 优点 : 可用于打印，是能保留高品质影像的格式;
+ - 缺点 : 档案一般比较大
+ 
+.tiff : 使用无损格式存储图像的能力使TIFF文件成为图像存档的有效方法
+ - 优点　: 能在后期软件上作后期制作、用于打印;
+ - 缺点　: 档案较大，也占用空间．

@@ -27,20 +27,16 @@ const validateMessages = {
 };
 /* eslint-enable */
 const AUpdate = React.forwardRef((prop, ref) => {
-    console.log(prop);
     const { aid } = prop;
 
     const title = useRef();
     const content = useRef();
 
     const onFinish = values => {
-        // console.log(values);
         UpdateArticleRequest(aid,values.title,values.content).then(res=>console.log(res.msg));
         // AddArticleRequest(values.title,values.content);
         values.title = "";
         values.content = "";
-        console.log(title);
-        console.log(content);
         title.current.input.value = "";
         content.current.resizableTextArea.textArea.value = "";
     };
@@ -54,7 +50,6 @@ const AUpdate = React.forwardRef((prop, ref) => {
     const getArticleData = useCallback((aid) => {
         getArticleRequest(aid)
             .then(data => {
-                console.log(data);
                 if (data.code === 200) {
                     safeSetArticleData(data);
                 }

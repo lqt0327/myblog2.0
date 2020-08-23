@@ -79,7 +79,7 @@ export const RightColumn = styled.nav`
         max-height: 400px;
         margin: 0 0 0 -2px;
         text-align: left;
-        font-size: .5em;
+        font-size: 20px;
         padding: 0 0 50px 0;
         border-left: solid ${styled["theme-color-v2"]} 2px;
         * {

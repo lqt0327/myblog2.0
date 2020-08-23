@@ -4,7 +4,7 @@ import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 // 设置高亮样式
 import { solarizedlight } from "react-syntax-highlighter/dist/esm/styles/prism";
 // 设置高亮的语言
-import { jsx, javascript, css } from "react-syntax-highlighter/dist/esm/languages/prism";
+import { jsx, javascript, css, markdown } from "react-syntax-highlighter/dist/esm/languages/prism";
 
 class CodeBlock extends PureComponent {
   static propTypes = {
@@ -22,6 +22,8 @@ class CodeBlock extends PureComponent {
     SyntaxHighlighter.registerLanguage("jsx", jsx);
     SyntaxHighlighter.registerLanguage("javascript", javascript);
     SyntaxHighlighter.registerLanguage("css", css);
+    SyntaxHighlighter.registerLanguage('markdown', markdown);
+
   }
 
   render() {

@@ -34,11 +34,9 @@ const AddArticle = () => {
     const onFinish = values => {
         // console.log(values);
         
-        // AddArticleRequest(values.title,values.content);
+        AddArticleRequest(values.title,values.content);
         values.title = "";
         values.content = "";
-        console.log(title);
-        console.log(content);
         title.current.input.value = "";
         content.current.resizableTextArea.textArea.value = "";
     };
