@@ -26,14 +26,15 @@ const validateMessages = {
     },
 };
 /* eslint-enable */
-const AUpdate = React.forwardRef((prop, ref) => {
-    const { aid } = prop;
+const AUpdate = (prop) => {
+
+    const { match: {params:{id}}} = prop
 
     const title = useRef();
     const content = useRef();
 
     const onFinish = values => {
-        UpdateArticleRequest(aid,values.title,values.content).then(res=>console.log(res.msg));
+        UpdateArticleRequest(id,values.title,values.content).then(res=>console.log(res.msg));
         // AddArticleRequest(values.title,values.content);
         values.title = "";
         values.content = "";
@@ -47,8 +48,8 @@ const AUpdate = React.forwardRef((prop, ref) => {
 
     const safeSetArticleData = res => articleMountedRef.current && setArticleData(res)
 
-    const getArticleData = useCallback((aid) => {
-        getArticleRequest(aid)
+    const getArticleData = useCallback((id) => {
+        getArticleRequest(id)
             .then(data => {
                 if (data.code === 200) {
                     safeSetArticleData(data);
@@ -64,8 +65,8 @@ const AUpdate = React.forwardRef((prop, ref) => {
     })
 
     useEffect(() => {
-        getArticleData(aid);
-    }, [getArticleData,aid])
+        getArticleData(id);
+    }, [getArticleData,id])
 
     return (
         <Page>
@@ -107,6 +108,6 @@ const AUpdate = React.forwardRef((prop, ref) => {
 
         </Page>
     );
-})
+}
 
 export default React.memo(AUpdate);

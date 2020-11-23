@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { getHomeMsgRequest } from '../../api/request';
 import { useRef } from 'react';
 import Loading from '../../baseUI/Loading';
-import ReactMarkdown from 'react-markdown';
-// import { array } from 'prop-types';
+import marked from 'marked'
 
 function Home(props) {
+
     const show= props[0];
     const setShow = props[1];
     const mountedRef = useRef(false);
@@ -36,7 +36,7 @@ function Home(props) {
         let last = props.location.pathname.split("/").pop()
         const page = isNaN(last) ? 1 : +last;
         getMsgData(page);
-    },[props.location.pathname,getMsgData])
+    },[props.location.pathname,getMsgData]) 
 
     return (
         <MainContent>
@@ -66,11 +66,10 @@ function Home(props) {
                                     </span>
                                 </p>
                                 <div className="post-abstract">
-                                    <ReactMarkdown
-                                    className="mdeditor"
-                                    source={item.content}
-                                    escapeHtml={false}
-                                    />
+                                    <div
+                                    dangerouslySetInnerHTML={{__html:marked(item.content)}}
+                                    >
+                                    </div>
                                 </div>
                             </div>
                         )

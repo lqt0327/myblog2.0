@@ -1,12 +1,25 @@
 import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { ArticePage } from './style';
-import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../../assets/CodeBlock';
 import { getArticleRequest } from '../../api/request';
 import Comment from '../../baseUI/comment';
 import Loading from '../../baseUI/Loading';
+import marked from 'marked'
+import hljs from "highlight.js"
+import 'highlight.js/styles/tomorrow-night-bright.css';
+import '../../markdown.css'
 
 function Article(props) {
+
+    const renderer = new marked.Renderer()
+
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        smartLists: true,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
 
     const [articleData, setArticleData] = useState({});
 
@@ -36,6 +49,7 @@ function Article(props) {
         getArticleData(aid);
     }, [props.location.pathname, getArticleData])
 
+
     return (
         <ArticePage>
             <div className="content">
@@ -49,15 +63,9 @@ function Article(props) {
                                 <span className="date meta-item">发布于 {new Date(articleData.time * 1000).toLocaleString()}</span>
                             </p>
                             <p className="post-abstract"></p>
-                            <ReactMarkdown
-                                className="mdeditor"
-                                source={articleData.content}
-                                escapeHtml={false}
-                                renderers={{
-                                    code: CodeBlock
-                                }}
-                            //   plugins={[toc]}
-                            />
+                            <div className="mdeditor"
+                            dangerouslySetInnerHTML={{__html:marked(articleData.content)}}
+                            ></div>
                         </div>
                         
                 <div className="pagination">

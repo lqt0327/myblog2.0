@@ -2,12 +2,12 @@
 
 博客于2020.8.12建立
 
-本站使用 React Hooks + styled-components + react-transition-group + react-router-config + react-markdown + react-syntax-highlighter 等技术栈搭建。
+本站使用 React Hooks + styled-components + react-transition-group + react-router-config + marked + highlight.js 等技术栈搭建。
   - 2020.08.12 建立，样式参照 Hexo 仿制
+  - 2020.08.23 增加缓存功能，优化网页加载速度，更改技术栈 react-markdown + react-syntax-highlighter 为 marked + highlight.js
+
 ## 关于我
 
-> 邮箱：llscw@qq.com    // 如有任何疑问，欢迎邮件联系
->
 > 邮箱：llscw@qq.com    // 如有任何疑问，欢迎邮件联系
 
 ## 声明

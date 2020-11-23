@@ -8,8 +8,9 @@ export const Page = styled.div`
 
 `
 
-const List = React.forwardRef((prop, ref)=> {
-    const { aupdate, aid } = prop;
+function List(props) {
+
+    const goPage = props[0]
 
     const mountedRef = useRef(false);
     const [update,setUpdate] = useState(false);
@@ -40,7 +41,7 @@ const List = React.forwardRef((prop, ref)=> {
 
     useEffect(()=>{
         getMsgData(page);
-    },[page,getMsgData,update,msgData,aid])
+    },[page,getMsgData,update])
 
     const columns = [
         {
@@ -61,12 +62,7 @@ const List = React.forwardRef((prop, ref)=> {
             key: 'action',
             render: (id) => (
                 <Space size="middle">
-                    <Button onClick={()=>{
-                        aupdate[0](true);
-                        aupdate[1](false);
-                        aupdate[2](false);
-                        prop.setAid(id);
-                    }}>更新</Button>
+                    <Button onClick={()=>{goPage('/update/'+id)}}>更新</Button>
                     <Button onClick={()=>{
                         deleteArticleRequest(id)
                         .then(data=>{
@@ -90,6 +86,6 @@ const List = React.forwardRef((prop, ref)=> {
               <Pagination defaultCurrent={1} total={msgData.data ? msgData.total : 0} onChange={(e)=>setPage(e)} />
         </Page>
     )
-})
+}
 
 export default React.memo(List);

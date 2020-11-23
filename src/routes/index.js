@@ -10,6 +10,9 @@ const TagsComponent = lazy(() => import("../application/Tags"))
 const AboutComponent = lazy(() => import("../application/Abouts"))
 const AdminComponent = lazy(() => import("../application/Admin"));
 const CateListComponent = lazy(() => import("../application/CateList"))
+const ListComponent = lazy(() => import("../application/Admin/List"));
+const AddComponent = lazy(() => import("../application/Admin/Add"));
+const UpdateComponent = lazy(() => import("../application/Admin/Update"));
 
 
 const SuspenseComponent = Component => props => {
@@ -25,8 +28,26 @@ export default [{
     routes: [
         {
             path: "/llscw/lqt0327/admin",
-            exact: true,
             component: SuspenseComponent(AdminComponent),
+            routes: [
+                {
+                    path: "/llscw/lqt0327/admin",
+                    exact: true,
+                    render: () => <Redirect to={"/llscw/lqt0327/admin/list"} />
+                },
+                {
+                    path:'/llscw/lqt0327/admin/list',
+                    component: SuspenseComponent(ListComponent)
+                },
+                {
+                    path:'/llscw/lqt0327/admin/add',
+                    component: SuspenseComponent(AddComponent)
+                },
+                {
+                    path:'/llscw/lqt0327/admin/update/:id',
+                    component: SuspenseComponent(UpdateComponent)
+                }
+            ]
         },
         {
             path: "/",

@@ -7,7 +7,10 @@ import { useCallback } from 'react';
 import Loading from '../../baseUI/Loading';
 import { Link } from 'react-router-dom'
 
-function Archive() {
+function Archive(props) {
+
+    const show= props[0];
+    const setShow = props[1];
 
     const [archiveData,setArchiveData] = useState({});
     
@@ -67,7 +70,7 @@ function Archive() {
                                                         <div className="listing-item" key={index2}>
                                                             <div className="listing-post">
                                                                 <p className="post-title">
-                                                                    <Link to={"/post/"+item2.id}>{item2.title}</Link>
+                                                                    <Link to={"/post/"+item2.id}  onClick={()=>{setShow(!show)}}>{item2.title}</Link>
                                                                 </p>
                                                                 <div className="post-time">
                                                                     <span className="ar-date">{item2.time[1]}-{item2.time[2]}</span>

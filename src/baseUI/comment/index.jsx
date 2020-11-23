@@ -1,13 +1,25 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Comment } from './style';
 import { getCommentsRequest } from '../../api/request';
-import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../../assets/CodeBlock';
-// import style from '../../assets/global-style';
-// import PropTypes from "prop-types";
+import marked from 'marked'
+import hljs from "highlight.js"
+import 'highlight.js/styles/monokai-sublime.css';
+import '../../markdown.css'
 
 // 处理函数组件拿不到ref的问题,所以用forwardRef
 const CommentContainer = React.forwardRef((props, ref) => {
+
+    const renderer = new marked.Renderer()
+
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        smartLists: true,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+
     const { pid } = props;
 
     const [comments,setCommentsData] = useState({});
@@ -128,15 +140,9 @@ const CommentContainer = React.forwardRef((props, ref) => {
                                         <span className="vat">回复</span>
                                     </div>
                                     <div className="vcontent">
-                                    <ReactMarkdown
-                                        className="mdeditor"
-                                        source={item.content}
-                                        escapeHtml={false}
-                                        renderers={{
-                                            code: CodeBlock
-                                        }}
-                                    //   plugins={[toc]}
-                                    />
+                                    <div className="mdeditor"
+                                    dangerouslySetInnerHTML={{__html:marked(item.content)}}
+                                    ></div>
                                     </div>
                                 </div>
                             </div>
