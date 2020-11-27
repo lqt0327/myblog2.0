@@ -23,12 +23,11 @@ function List(props) {
     const getMsgData = useCallback((page) => {
         getHomeMsgRequest(page)
         .then(data=>{
-            if(data.code === 200) {
-                for(let i = 0; i < data.data.data.length; i++) {
-                    data.data.data[i].key = i
-                }
-                safeSetMsgData(data.data);
+            for(let i = 0; i < data.data.length; i++) {
+                data.data[i].key = i
             }
+            console.log(data,'++++')
+            safeSetMsgData(data);
         })
     },[])
 
@@ -46,19 +45,19 @@ function List(props) {
     const columns = [
         {
             title: 'Title',
-            dataIndex: 'title',
+            dataIndex: 'a_title',
             key: 'title',
             render: text => <span>{text}</span>,
         },
         {
             title: 'Time',
-            dataIndex: 'time',
+            dataIndex: 'a_time',
             key: 'time',
             render: time => <span>{new Date(time*1000).toLocaleString()}</span>
         },
         {
             title: 'Action',
-            dataIndex:'id',
+            dataIndex:'a_id',
             key: 'action',
             render: (id) => (
                 <Space size="middle">
@@ -67,7 +66,6 @@ function List(props) {
                         deleteArticleRequest(id)
                         .then(data=>{
                             setUpdate(!update);
-                            console.log(data.msg)
                         })
                     }
                     }>删除</Button>

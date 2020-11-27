@@ -12,7 +12,7 @@ function Archive(props) {
     const show= props[0];
     const setShow = props[1];
 
-    const [archiveData,setArchiveData] = useState({});
+    const [archiveData,setArchiveData] = useState([]);
     
     const archiveMountedRef = useRef(false);
 
@@ -21,16 +21,16 @@ function Archive(props) {
     const getArchiveData = useCallback(()=>{
         getArchivesRequest()
         .then(res=>{
-            if(res.code === 200) {
-                // 筛选出年份并拼接到新加的 year 属性上
+            if(res.length > 0) {
+                    // 筛选出年份并拼接到新加的 year 属性上
                 res.year = [];
-                for(let i = 0; i < res.data.length; i++) {
-                    res.data[i].time = new Date(res.data[i].time*1000).toLocaleDateString().split('/');
-                    if(i > 0 && res.data[i].time[0] !== res.data[i-1].time[0]) {
-                        res.year.push(res.data[i].time[0]);
+                for(let i = 0; i < res.length; i++) {
+                    res[i].time = new Date(res[i].time*1000).toLocaleDateString().split('/');
+                    if(i > 0 && res[i].time[0] !== res[i-1].time[0]) {
+                        res.year.push(res[i].time[0]);
                     } 
                 }
-                res.year.unshift(res.data[0].time[0])
+                res.year.unshift(res[0].time[0])
                 safeSetArchiveData(res)
             }
         })
@@ -53,10 +53,10 @@ function Archive(props) {
             <div className="content">
                 <div className="archive animated">
                     <ul className="list-with-title">
-                        <p className="post-title">归档 {archiveData.data ? archiveData.data.length : 0} 篇</p>
+                        <p className="post-title">归档 {archiveData ? archiveData.length : 0} 篇</p>
                         <div className="archive">
                             {
-                                archiveData.data ? archiveData.year.map((item, index) => {
+                                archiveData.length >0 ? archiveData.year.map((item, index) => {
                                     return (
                                         <div key={index}>
                                         <div className="listing-title">
@@ -65,7 +65,7 @@ function Archive(props) {
                                         <div className="listing">
                                             {
                                                 // 将各个年份的数据分类筛选
-                                                archiveData.data.filter(ans=>ans.time[0] === item).map((item2, index2) => {
+                                                archiveData.filter(ans=>ans.time[0] === item).map((item2, index2) => {
                                                     return (
                                                         <div className="listing-item" key={index2}>
                                                             <div className="listing-post">

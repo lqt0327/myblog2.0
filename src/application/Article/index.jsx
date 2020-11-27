@@ -30,9 +30,7 @@ function Article(props) {
     const getArticleData = useCallback((aid) => {
         getArticleRequest(aid)
             .then(data => {
-                if (data.code === 200) {
-                    safeSetArticleData(data.data);
-                }
+                safeSetArticleData(data);
             })
     }, [])
 

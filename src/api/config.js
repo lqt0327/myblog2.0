@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "https://one.luoqintai.cn/api";
+export const baseUrl = "http://[::1]:3001";
 
 // axios的实例及拦截器配置
 const axiosInstance = axios.create({

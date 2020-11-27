@@ -13,7 +13,7 @@ const CateListComponent = lazy(() => import("../application/CateList"))
 const ListComponent = lazy(() => import("../application/Admin/List"));
 const AddComponent = lazy(() => import("../application/Admin/Add"));
 const UpdateComponent = lazy(() => import("../application/Admin/Update"));
-
+const ErrorsComponent = lazy(() => import("../application/Errors"));
 
 const SuspenseComponent = Component => props => {
     return (
@@ -85,6 +85,9 @@ export default [{
                 {
                     path: "/about",
                     component: SuspenseComponent(AboutComponent)
+                },
+                {
+                    component: SuspenseComponent(ErrorsComponent)  
                 }
             ]
         }

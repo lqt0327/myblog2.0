@@ -4,7 +4,8 @@ import { getCommentsRequest } from '../../api/request';
 import marked from 'marked'
 import hljs from "highlight.js"
 import 'highlight.js/styles/monokai-sublime.css';
-import '../../markdown.css'
+import '../../markdown.css';
+import Reply from '../reply';
 
 // 处理函数组件拿不到ref的问题,所以用forwardRef
 const CommentContainer = React.forwardRef((props, ref) => {
@@ -22,7 +23,7 @@ const CommentContainer = React.forwardRef((props, ref) => {
 
     const { pid } = props;
 
-    const [comments,setCommentsData] = useState({});
+    const [comments,setCommentsData] = useState([]);
     const [page, setPage] = useState(1);
 
     const commentsMountedRef = useRef(false);
@@ -34,9 +35,7 @@ const CommentContainer = React.forwardRef((props, ref) => {
     const getCommentsData = useCallback((pid,page) => {
         getCommentsRequest(pid,page)
         .then(res => {
-            if(res.code === 200) {
-                safeSetCommentsData(res.data);
-            }
+            safeSetCommentsData(res);
         })
     },[])
 
@@ -88,46 +87,13 @@ const CommentContainer = React.forwardRef((props, ref) => {
             </div>
             <div className="vinfo">
                 <div className="vcount col">
-                    <span className="vnum">{comments ? comments.total : 0}</span>
+                    <span className="vnum">{comments ? comments.length : 0}</span>
                     评论(功能测试中)
                 </div>
             </div>
             <div className="vlist">
-                <div className="vcard">
-                    <img className="vimg" src={require('../../assets/images/comment/avatar_default.png')} alt="" />
-                    <div className="vh">
-                        <div className="vhead">
-                            <span className="vnick">Anonymous</span>
-                        </div>
-                        <div className="vmeta">
-                            <span className="vtime">2020-07-23</span>
-                            <span className="vat">回复</span>
-                        </div>
-                        <div className="vcontent">
-                            <p>这个主题真好看，进来学习学习</p>
-                        </div>
-                        <div className="vquote">
-                            <div className="vcard">
-                                <img className="vimg" src={require('../../assets/images/comment/avatar_default.png')} alt="" />
-                                <div className="vh">
-                                    <div className="vhead">
-                                        <span className="vnick">Anonymous</span>
-                                    </div>
-                                    <div className="vmeta">
-                                        <span className="vtime">2020-07-23</span>
-                                        <span className="vat">回复</span>
-                                    </div>
-                                    <div className="vcontent">
-                                        <p>这个主题真好看，进来学习学习</p>
-                                    </div>
-                                    <div className="vquote"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 {
-                    comments.data && Object.values(comments.data).map((item, index) => {
+                    comments && Object.values(comments).map((item, index) => {
                         return (
                             <div className="vcard" key={index}>
                                 <img className="vimg" src={require('../../assets/images/comment/avatar_default.png')} alt="" />
@@ -140,10 +106,11 @@ const CommentContainer = React.forwardRef((props, ref) => {
                                         <span className="vat">回复</span>
                                     </div>
                                     <div className="vcontent">
-                                    <div className="mdeditor"
-                                    dangerouslySetInnerHTML={{__html:marked(item.content)}}
-                                    ></div>
+                                        <div className="mdeditor"
+                                        dangerouslySetInnerHTML={{__html:marked(item.content)}}
+                                        ></div>
                                     </div>
+                                    <Reply item={item} />
                                 </div>
                             </div>
                         )

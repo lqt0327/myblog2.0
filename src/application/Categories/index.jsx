@@ -17,7 +17,7 @@ function Categories(props) {
     const show= props[0];
     const setShow = props[1];
 
-    const [cateData, setCateData] = useState({});
+    const [cateData, setCateData] = useState([]);
 
     const cateMountedRef = useRef(false);
 
@@ -26,10 +26,7 @@ function Categories(props) {
     const getCateData = useCallback(()=>{
         getCateRequest()
         .then(res=>{
-            if(res.code === 200) {
-                // console.log(props,res);
-                safeSetCateData(res);
-            }
+            safeSetCateData(res);
         })
     },[])
 
@@ -53,7 +50,7 @@ function Categories(props) {
                         <div className="archive"></div>
                         <ul className="listing">
                             {
-                                cateData.data ? cateData.data.map((item, index) => {
+                                cateData ? cateData.map((item, index) => {
                                     return (
                                         <div className="list-item" key={index}>
                                             <div className="listing-post">

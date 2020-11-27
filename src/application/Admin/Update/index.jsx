@@ -29,12 +29,11 @@ const validateMessages = {
 const AUpdate = (prop) => {
 
     const { match: {params:{id}}} = prop
-
     const title = useRef();
     const content = useRef();
 
     const onFinish = values => {
-        UpdateArticleRequest(id,values.title,values.content).then(res=>console.log(res.msg));
+        UpdateArticleRequest(id,values.title,values.content);
         // AddArticleRequest(values.title,values.content);
         values.title = "";
         values.content = "";
@@ -51,9 +50,7 @@ const AUpdate = (prop) => {
     const getArticleData = useCallback((id) => {
         getArticleRequest(id)
             .then(data => {
-                if (data.code === 200) {
-                    safeSetArticleData(data);
-                }
+                safeSetArticleData(data);
             })
     }, [])
 
@@ -71,7 +68,7 @@ const AUpdate = (prop) => {
     return (
         <Page>
             {
-                articleData.data ?
+                Object.values(articleData).length > 0 ?
                     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                         <Form.Item
                             name='title'
@@ -81,7 +78,7 @@ const AUpdate = (prop) => {
                                     required: true,
                                 },
                             ]}
-                            initialValue={articleData.data.title}
+                            initialValue={articleData.title}
                         >
                             <Input ref={title} />
                         </Form.Item>
@@ -93,7 +90,7 @@ const AUpdate = (prop) => {
                                     required: true,
                                 },
                             ]}
-                            initialValue={articleData.data.content}
+                            initialValue={articleData.content}
                         >
                             <Input.TextArea autoSize ref={content} />
                         </Form.Item>

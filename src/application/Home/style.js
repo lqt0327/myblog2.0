@@ -25,8 +25,12 @@ export const MainContent = styled.div`
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
+            /* 火狐和ie不支持这个属性，所以需要通过line-height和height配合伪元素 */
             -webkit-line-clamp: 2;
             width:100%;
+            line-height: 26px;
+            position: relative;
+            height: 46px;
             * {
                 display:inline;
                 /* white-space:nowrap; */
@@ -36,6 +40,17 @@ export const MainContent = styled.div`
                     display:none;
                 }
             }
+        }
+
+        & > .post-abstract:after {
+            content: '';
+            text-align:right;
+            position:absolute;
+            bottom: 0;
+            right: 0;
+            width:10%;
+            height: 26px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)
         }
     }
 `

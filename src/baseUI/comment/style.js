@@ -177,13 +177,8 @@ export const Comment = styled.div`
                 padding-top: .625em;
                 p {
                     font-size: 14px;
+                    margin-top: 0;
                 }
-            }
-            .vquote {
-                color: #666;
-                margin-top: 1em;
-                padding-left: 1em;
-                border-left: 1px dashed hsla(0,0%,93%,.5);
             }
         }
     }

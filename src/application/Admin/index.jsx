@@ -31,7 +31,6 @@ function SiderDemo(props) {
     },[])
 
     const onCollapse = collapsed => {
-        console.log(collapsed);
         setCollapsed(collapsed)
     };
 

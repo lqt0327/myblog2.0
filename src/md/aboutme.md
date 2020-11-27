@@ -5,6 +5,7 @@
 本站使用 React Hooks + styled-components + react-transition-group + react-router-config + marked + highlight.js 等技术栈搭建。
   - 2020.08.12 建立，样式参照 Hexo 仿制
   - 2020.08.23 增加缓存功能，优化网页加载速度，更改技术栈 react-markdown + react-syntax-highlighter 为 marked + highlight.js
+  - 2020.11.26 处理火狐和ie的部分兼容性问题，替换中台接口，优化首页文章标签
 
 ## 关于我
 
