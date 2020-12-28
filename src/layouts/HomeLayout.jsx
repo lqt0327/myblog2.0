@@ -15,14 +15,14 @@ function Home(props) {
             <SwitchTransition>
                 <CSSTransition key={show} appear classNames="rights" timeout={200}>
                     <RightColumn>
-                        <div className="vertical-text site-title" onClick={() => { setShow(!show);props.history.push('/') }}>
+                        <Link className="vertical-text site-title" to="/home" onClick={() => { setShow(!show); }}>
                             <h3 className="site-title-small">
-                                <a href="/" className="a-title">几万次，几亿次，不断往复</a>
+                                <span className="a-title">几万次，几亿次，不断往复</span>
                             </h3>
                             <h1 className="site-title-large">
-                                <a href="/" className="a-title">海与潮汐</a>
+                                <span className="a-title">海与潮汐</span>
                             </h1>
-                        </div>
+                        </Link>
                         <br className="visible-lg visible-md visible-sm" />
                         <div className="site-title-links">
                             <ul onClick={(e)=>{

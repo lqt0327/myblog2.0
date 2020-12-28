@@ -13,6 +13,7 @@ export const Page = styled.div`
         top:20px;
         opacity:0;
         transition:all 0.5s ease-out;
+        transform: translateZ(0);
         p {
             margin: 10px 0 0;
             font-size: 17px;
@@ -64,6 +65,7 @@ export const RightColumn = styled.nav`
     width:30vw;
     height:100vh;
     transition: all .5s ease-out;
+    transform: translateZ(0);
     &.rights-enter-done{
         transform:translate3d(-20px,0,0);
         opacity: 1;

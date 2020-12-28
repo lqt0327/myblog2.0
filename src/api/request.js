@@ -53,11 +53,12 @@ export const AddArticleRequest = (title, content, cateid=11) => {
 };
 
 // 更新文章
-export const UpdateArticleRequest = (id,title,content) => {
+export const UpdateArticleRequest = (id,title,content,cateid=11) => {
   return axiosInstance.patch(
     `/article/${id}`,{
       title:title,
-      content:content
+      content:content,
+      cateid:cateid
     }
   )
 }

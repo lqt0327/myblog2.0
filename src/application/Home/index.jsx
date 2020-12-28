@@ -19,6 +19,10 @@ function Home(props) {
     const getMsgData = useCallback((page) => {
         getHomeMsgRequest(page)
         .then(data=>{
+            // 去除特殊字符 解决字体排版问题
+            for(let v of data.data) {
+                v.a_content = v.a_content.replace(/[\s#]*/g,"")
+            }
             safeSetMsgData(data);
         })
     },[])
